@@ -11,6 +11,7 @@ makedocs(
         assets = ["assets/juliareach-light.css"]),
     pages = [
         "Home" => "index.md",
+        "Basics" => "basics.md",
         "About" => "about.md"
     ],
     strict = true
