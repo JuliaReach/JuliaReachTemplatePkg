@@ -84,6 +84,12 @@ The order of a Zonotope `Z` in LazySets can be calculated using the function `or
 A zonotope can be seen as the Minkowski addition of line segments resulting in centrally symmetric
 convex polytopes as shown in the following figure, which illustrates how each generator spans the zonotope.
 
+| Operation                 | Cost                |
+|---------------------------|---------------------|
+| $Z_1 \oplus Z_2$          | $n$                 |
+| $MZ_1$                    | $2mn(k+1)$          |
+| $CH(Z_1, e^{A\delta}Z_1)$ | $2n^2(k+1)+2n(k+2)$ |
+
 ```@example zonotope_example_1
 using LazySets, Plots
 Z = Zonotope([1, 1.], [-1 0.3 1.5 0.3; 0 0.1 -0.3 0.3])
@@ -108,6 +114,13 @@ for a given direction $\ell$, it defines the position of a halfspace
 ```math
     \mathcal{H}_{\ell} = \{x \in \mathbb{R}^n | \ell^T x \leq \rho_{\mathcal{X}}(\ell)\},
 ```
+
+| Operation                 | Cost  |
+|---------------------------|-------|
+| $\rho_{x \oplus y}(\ell)$ | $1$   |
+| $\rho_{MX}(\ell)$         | $2mn$ |
+| $\rho_{CH(x, y)}(\ell)$   | $1$   |
+
 which touches and contains $\mathcal{X}$ . If $\ell$ is of unit length, then
 $\rho_{\mathcal{X}}(\ell)$ is the signed distance of $\mathcal{H}_{\ell}$ to the origin.
 Evaluating the support function for a set of directions $L ⊆ \mathbb{R}^n$ provides an overapproximation
