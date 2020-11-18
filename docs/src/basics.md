@@ -84,6 +84,14 @@ The order of a Zonotope `Z` in LazySets can be calculated using the function `or
 A zonotope can be seen as the Minkowski addition of line segments resulting in centrally symmetric
 convex polytopes as shown in the following figure, which illustrates how each generator spans the zonotope.
 
+$Z_1 = (c, \langle v_1, \dotsb, v_k \rangle), Z_2 = (d, \langle w_1, \dotsb, w_m \rangle) \subset \mathbb{R}^n, M \in \mathbb{R}^{m \times n}$
+
+$Z_1 \oplus Z_2 = (c+d, \langle v_1, \dotsb, v_k, w_1, \dotsb, w_m \rangle)$
+
+$MZ_1 = (Mc, \langle Mv_1, \dotsb, Mv_k \rangle)$
+
+$CH(Z_1, e^{A\delta}Z_1) \subseteq \frac{1}{2}(c + e^{A\delta}c,\langle v_1 + e^{A\delta}v_1, \dotsb, v_k+e^{A\delta}v_k, v_1 - e^{A\delta}v_1, v_k - e^{A\delta}v_k, c - e^{A\delta}c \rangle )$
+
 | Operation                 | Cost                |
 |---------------------------|---------------------|
 | $Z_1 \oplus Z_2$          | $n$                 |
@@ -115,11 +123,20 @@ for a given direction $\ell$, it defines the position of a halfspace
     \mathcal{H}_{\ell} = \{x \in \mathbb{R}^n | \ell^T x \leq \rho_{\mathcal{X}}(\ell)\},
 ```
 
-| Operation                 | Cost  |
-|---------------------------|-------|
-| $\rho_{x \oplus y}(\ell)$ | $1$   |
-| $\rho_{MX}(\ell)$         | $2mn$ |
-| $\rho_{CH(x, y)}(\ell)$   | $1$   |
+
+
+
+$\rho_{\mathcal{X} \oplus \mathcal{Y}}(\ell) = \rho_{\mathcal{X}}(\ell) + \rho_{\mathcal{Y}}(\ell)$
+
+$\rho_{M\mathcal{X}}(\ell) = \rho_{\mathcal{X}}(M^T\ell), (M \in \mathbb{R}^{m \times n})$
+
+$\rho_{CH(\mathcal{X}, \mathcal{Y})}(\ell) = max{\rho_{\mathcal{X}(\ell)}, \rho_{\mathcal{Y}(\ell)}}$
+
+| Operation                                     | Cost  |
+|-----------------------------------------------|-------|
+| $\rho_{\mathcal{X} \oplus \mathcal{Y}}(\ell)$ | $1$   |
+| $\rho_{M\mathcal{X}}(\ell)$                   | $2mn$ |
+| $\rho_{CH(\mathcal{X}, \mathcal{Y})}(\ell)$   | $1$   |
 
 which touches and contains $\mathcal{X}$ . If $\ell$ is of unit length, then
 $\rho_{\mathcal{X}}(\ell)$ is the signed distance of $\mathcal{H}_{\ell}$ to the origin.
